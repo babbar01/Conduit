@@ -1,4 +1,4 @@
-package com.example.conduit.ui.dashboard
+package com.example.conduit.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.conduit.R
-import com.example.conduit.databinding.FragmentDashboardBinding
+import com.example.conduit.databinding.FragmentProfileBinding
 
-class DashboardFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
-    private var _binding:FragmentDashboardBinding? = null
+    private lateinit var profileViewModel: ProfileViewModel
+    private var _binding:FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,16 +22,12 @@ class DashboardFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
+        profileViewModel =
+                ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater,container,false)
+        _binding = FragmentProfileBinding.inflate(inflater,container,false)
         val root = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

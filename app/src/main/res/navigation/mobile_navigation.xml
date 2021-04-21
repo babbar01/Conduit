@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -12,14 +12,22 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.conduit.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_create_article"
+        android:name="com.example.conduit.ui.profile.ProfileFragment"
+        android:label="@string/title_create_article"
+        tools:layout="@layout/fragment_new_article" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.conduit.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_profile"
+        android:name="com.example.conduit.ui.newArticle.NewArticleFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.conduit.ui.auth.AuthFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_auth" />
+
+
 </navigation>

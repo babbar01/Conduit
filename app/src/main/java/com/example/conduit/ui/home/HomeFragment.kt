@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.conduit.R
-import com.example.conduit.databinding.FragmentDashboardBinding
 import com.example.conduit.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -28,11 +27,6 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
         val root = binding.root
-        val textView: TextView = binding.textHome
-
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

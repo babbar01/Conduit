@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 object ConduitClient {
 
     var authToken : String? = null
-    var authIntercepter = Interceptor {chain->
+    private var authIntercepter = Interceptor {chain->
 
         var request = chain.request()
 
