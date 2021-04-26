@@ -5,38 +5,47 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import com.example.api.models.entity.Article
 import com.example.conduit.R
+import com.example.conduit.databinding.FragmentGlobalFeedBinding
+import com.example.conduit.databinding.ItemArticlesListBinding
 
-import com.example.conduit.ui.home.dummy.DummyContent.DummyItem
+class ArticleAdapter : ListAdapter<Article, ArticleAdapter.ViewHolder>(
+    object : DiffUtil.ItemCallback<Article>(){
+        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return oldItem == newItem
+        }
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem].
- * TODO: Replace the implementation with code for your data type.
- */
-class ArticleAdapter(
-    private val values: List<DummyItem>
-) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return oldItem.toString() == newItem.toString()
+        }
+
+    }
+) {
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val binding = ItemArticlesListBinding.bind(view)
+        fun bind(article: Article) {
+            binding.apply {
+                titleTextView.text = article.title
+                authorTextView.text = article.author.username
+                dateTextView.text = article.createdAt
+                bodyTextView.text = article.body
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_global_feed, parent, false)
+            .inflate(R.layout.item_articles_list, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        val article = getItem(position)
+        holder.bind(article)
     }
 
-    override fun getItemCount(): Int = values.size
-
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
-        val contentView: TextView = view.findViewById(R.id.content)
-
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
-        }
-    }
 }

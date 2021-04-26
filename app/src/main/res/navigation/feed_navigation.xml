@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feed_navigation"
+    app:startDestination="@id/globalFeedFragment">
+
+    <fragment
+        android:id="@+id/myFeedFragment"
+        android:name="com.example.conduit.ui.home.MyFeedFragment"
+        android:label="fragment_my_feed"
+        tools:layout="@layout/fragment_my_feed" >
+        <action
+            android:id="@+id/action_myFeedFragment_to_globalFeedFragment"
+            app:destination="@id/globalFeedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/globalFeedFragment"
+        android:name="com.example.conduit.ui.home.GlobalFeedFragment"
+        android:label="fragment_global_feed"
+        tools:layout="@layout/fragment_global_feed">
+        <action
+            android:id="@+id/action_globalFeedFragment_to_myFeedFragment"
+            app:destination="@id/myFeedFragment" />
+    </fragment>
+</navigation>
