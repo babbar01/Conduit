@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_create_article"
-        android:name="com.example.conduit.ui.profile.ProfileFragment"
+        android:name="com.example.conduit.ui.newArticle.NewArticleFragment"
         android:label="@string/title_create_article"
         tools:layout="@layout/fragment_new_article" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.conduit.ui.newArticle.NewArticleFragment"
+        android:name="com.example.conduit.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
