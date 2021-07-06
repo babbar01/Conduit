@@ -31,11 +31,10 @@ class AuthViewModel : ViewModel() {
 
         ConduitClient.authToken = token
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val userResponse = authApi.getCurrentUser()
             user.postValue(userResponse.body()?.user)
         }
-
     }
 
     fun login(email: String, password: String) = viewModelScope.async(Dispatchers.IO) {

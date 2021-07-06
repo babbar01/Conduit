@@ -1,7 +1,9 @@
 package com.example.api
 
+import com.example.api.models.entity.AddCommentCreds
 import com.example.api.models.entity.LoginCreds
 import com.example.api.models.entity.SignUpCreds
+import com.example.api.models.request.AddCommentRequest
 import com.example.api.models.request.LoginRequest
 import com.example.api.models.request.SignUpRequest
 import kotlinx.coroutines.runBlocking
@@ -80,8 +82,5 @@ class ConduitClientTests {
             assertNotNull(articles)
         }
     }
-
-
-
 
 }

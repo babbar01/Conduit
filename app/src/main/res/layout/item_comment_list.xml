@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/avatarImageView"
+            android:src="@color/conduit_blue"
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/authorTextView"
+                android:text="username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:text="December 15, 2020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/bodyTextView"
+        android:text="ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:maxLines="2"
+        android:padding="4dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+</LinearLayout>

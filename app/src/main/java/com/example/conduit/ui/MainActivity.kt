@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-
         }
 
 
@@ -94,8 +93,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateBottomNavMenu(navView: BottomNavigationView,user : User?) {
-        when {
-            user == null -> {
+        when (user) {
+            null -> {
                 navView.menu.clear()
                 navView.inflateMenu(R.menu.bottom_nav_menu_guest)
             }

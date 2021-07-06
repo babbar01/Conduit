@@ -67,12 +67,12 @@ interface ConduitAuthApi {
             @Body updateArticleRequest: UpdateArticleRequest
     ): Response<ArticleResponse>
 
-    @DELETE("/articles/{slug}")
+    @DELETE("articles/{slug}")
     suspend fun deleteArticle(@Path("slug") slug: String)
 
     // comment
 
-    @POST("api/articles/{slug}/comments")
+    @POST("articles/{slug}/comments")
     suspend fun addComment(
             @Path("slug") slug: String,
             @Body addCommentRequest: AddCommentRequest

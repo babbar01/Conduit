@@ -1,6 +1,7 @@
 package com.example.conduit.ui.article
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.api.models.entity.AddCommentCreds
 import com.example.api.models.entity.Article
 import com.example.conduit.databinding.FragmentArticleBinding
 import com.example.conduit.ui.AuthViewModel
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ArticleFragment : Fragment() {
@@ -27,6 +31,7 @@ class ArticleFragment : Fragment() {
     private val binding get() = _binding!!
     private val authViewModel by activityViewModels<AuthViewModel>()
     private lateinit var articleViewModel: ArticleViewModel
+    private lateinit var article : Article
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +43,29 @@ class ArticleFragment : Fragment() {
 
         setArticleInLayout()
 
+        binding.btnAddComment.setOnClickListener {
+            Toast.makeText(context,"${article.slug}",Toast.LENGTH_LONG).show()
+            val commentBody = binding.editTextComment.text.toString()
+            Log.d(CHIP_FAVOURITE_STRING, "onCreateView: $commentBody")
+            val deffered = articleViewModel.addComment(article.slug, AddCommentCreds(body = commentBody))
+            lifecycleScope.launch(Dispatchers.IO) {
+                deffered.await()
+                articleViewModel.fetchCommentList(article.slug)
+            }
+            binding.editTextComment.text?.clear()
+            binding.editTextComment.clearFocus()
+        }
+
+        val commentsAdapter = CommentAdapter()
+
+        binding.recylerViewComments.apply {
+            adapter = commentsAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        articleViewModel.commentList.observe(viewLifecycleOwner){
+            commentsAdapter.submitList(it)
+        }
 
         return binding.root
     }
@@ -70,18 +98,15 @@ class ArticleFragment : Fragment() {
         }
     }
 
-    private fun setAddCommentBtnOnClick(article: Article) {
-        binding.btnAddComment.setOnClickListener {
-            // TODO: 04-05-2021 Start from here
-        }
-    }
-
     private fun setArticleInLayout() {
         authViewModel.currentArticle.observe(viewLifecycleOwner) { article ->
+            this.article = article
+            updateArticleComments(article)
             article?.let {
 
+
+
                 setFavouriteBtnOnClick(it)
-                setAddCommentBtnOnClick(it)
 
                 binding.apply {
                     chipFavouriteArticle.text = if(it.favorited) CHIP_UNFAVOURITE_STRING
@@ -115,6 +140,11 @@ class ArticleFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun updateArticleComments(article: Article) {
+        articleViewModel.fetchCommentList(article.slug)
+
     }
 
     override fun onDestroy() {
