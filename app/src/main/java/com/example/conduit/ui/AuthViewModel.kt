@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.example.api.ConduitClient
+import com.example.api.models.entity.Article
 import com.example.api.models.entity.LoginCreds
 import com.example.api.models.entity.SignUpCreds
 import com.example.api.models.entity.User
@@ -13,13 +14,29 @@ import com.example.api.models.request.LoginRequest
 import com.example.api.models.request.SignUpRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+
 class AuthViewModel : ViewModel() {
 
     val TAG = "AuthViewModelTag"
 
     val basicApi = ConduitClient.basicApi
+    val authApi = ConduitClient.authApi
 
     val user = MutableLiveData<User?>(null)
+
+    val currentArticle = MutableLiveData<Article>(null)
+
+    fun getCurrentUser(token : String){
+
+        ConduitClient.authToken = token
+
+        viewModelScope.launch {
+            val userResponse = authApi.getCurrentUser()
+            user.postValue(userResponse.body()?.user)
+        }
+
+    }
 
     fun login(email: String, password: String) = viewModelScope.async(Dispatchers.IO) {
         val userResponse = basicApi.loginUser(LoginRequest(LoginCreds(email, password)))

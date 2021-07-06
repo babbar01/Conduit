@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.api.ConduitClient
 import com.example.conduit.R
 import com.example.conduit.databinding.FragmentMyFeedBinding
@@ -18,6 +19,8 @@ class MyFeedFragment : Fragment() {
     private var _binding : FragmentMyFeedBinding? = null
     private lateinit var homeViewModel: HomeViewModel
     private val binding get() = _binding!!
+    private val authViewModel by activityViewModels<AuthViewModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +29,14 @@ class MyFeedFragment : Fragment() {
         _binding = FragmentMyFeedBinding.inflate(inflater)
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
-        val adapter = ArticleAdapter()
+        val adapter = ArticleAdapter { article ->
+
+            authViewModel.currentArticle.postValue(article)
+
+            activity?.findNavController(R.id.nav_host_fragment)
+                ?.navigate(R.id.action_navigation_home_to_articleFragment)
+        }
+
         binding.recyclerViewMyFeed.adapter = adapter
 
         ConduitClient.authToken

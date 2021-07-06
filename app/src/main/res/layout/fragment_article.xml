@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.article.ArticleFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <LinearLayout
+       android:id="@+id/layout_article_header"
+       android:paddingLeft="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="170dp"
+       android:background="@color/conduit_dark_grey"
+       android:orientation="vertical"
+       app:layout_constraintTop_toTopOf="parent">
+
+
+       <TextView
+           android:id="@+id/articleTitle"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="article_title"
+           android:textColor="@color/conduit_green"
+           android:textStyle="bold"
+           android:textSize="30sp"
+           android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+            android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/avatarImageViewArticleFragment"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@color/conduit_green"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/authorTextViewArticleFragment"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:text="username"/>
+
+            <TextView
+                android:textColor="@color/conduit_grey"
+                android:id="@+id/dateTextViewArticleFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:text="December 15, 2020"/>
+        </LinearLayout>
+
+   </LinearLayout>
+
+       <LinearLayout
+           android:layout_marginTop="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+
+           <com.google.android.material.chip.Chip
+               android:id="@+id/chipFavouriteArticle"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="favourite"
+               app:chipIcon="@drawable/ic_favourite"
+               app:chipIconTint="@color/red"/>
+
+
+       </LinearLayout>
+
+   </LinearLayout>
+
+
+    <WebView
+        android:layout_marginTop="20dp"
+        android:id="@+id/webViewArticleBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout_article_header"/>
+
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_marginTop="10dp"
+        android:id="@+id/chipGroupTags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/webViewArticleBody"/>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEditTextComment"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/chipGroupTags"
+        app:startIconDrawable="@drawable/ic_comment"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextComment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:minLines="4"
+            android:hint="Write a Comment"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutEditTextComment"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:strokeColor="@color/conduit_green"
+        app:strokeWidth="2dp"
+        android:text="Add Comment"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerViewComments"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/btnAddComment"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

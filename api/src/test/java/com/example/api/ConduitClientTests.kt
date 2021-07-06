@@ -18,7 +18,7 @@ class ConduitClientTests {
     @Test
     fun `GET articles`(){
         runBlocking {
-            val articles = api.getArticles(author = "aman")
+            val articles = authApi.getArticles(author = "aman")
             assertNotNull(articles.body()?.articles)
         }
     }

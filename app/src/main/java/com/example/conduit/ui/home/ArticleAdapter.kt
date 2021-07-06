@@ -12,7 +12,9 @@ import com.example.conduit.R
 import com.example.conduit.databinding.FragmentGlobalFeedBinding
 import com.example.conduit.databinding.ItemArticlesListBinding
 
-class ArticleAdapter : ListAdapter<Article, ArticleAdapter.ViewHolder>(
+class ArticleAdapter(
+    val onClickArticle : (article : Article) -> Unit
+) : ListAdapter<Article, ArticleAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<Article>(){
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem == newItem
@@ -35,6 +37,10 @@ class ArticleAdapter : ListAdapter<Article, ArticleAdapter.ViewHolder>(
                 bodyTextView.text = article.body
             }
         }
+
+        fun setOnArticleClicked(article: Article) = binding.root.setOnClickListener {
+            onClickArticle(article)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,6 +52,7 @@ class ArticleAdapter : ListAdapter<Article, ArticleAdapter.ViewHolder>(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = getItem(position)
         holder.bind(article)
+        holder.setOnArticleClicked(article)
     }
 
 }

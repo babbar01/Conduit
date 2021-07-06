@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayout
 
 class HomeFragment : Fragment() {
 
-    companion object{
+    companion object {
         const val TAG = "HomeFragmentDebug"
     }
 
@@ -24,30 +24,35 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater,container,false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navController = Navigation.findNavController(binding.root.findViewById(R.id.feed_nav_host_fragment))
+        val navController =
+            Navigation.findNavController(binding.root.findViewById(R.id.feed_nav_host_fragment))
 
         // so as to not show myfeed fragment when user is not logged in
-        if(ConduitClient.authToken == null) binding.tabviewLayout.removeTabAt(1)
+        if (ConduitClient.authToken == null) binding.tabviewLayout.removeTabAt(1)
 
         binding.tabviewLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> navController.navigate(R.id.action_myFeedFragment_to_globalFeedFragment)
-                    1 -> navController.navigate(R.id.action_globalFeedFragment_to_myFeedFragment)
+                    0 -> if (navController.currentDestination?.id == R.id.myFeedFragment) navController.navigate(
+                        R.id.action_myFeedFragment_to_globalFeedFragment
+                    )
+                    1 -> if (navController.currentDestination?.id == R.id.globalFeedFragment) navController.navigate(
+                        R.id.action_globalFeedFragment_to_myFeedFragment
+                    )
                 }
             }
 

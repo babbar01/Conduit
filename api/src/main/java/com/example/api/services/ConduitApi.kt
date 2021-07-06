@@ -8,23 +8,6 @@ import retrofit2.http.*
 
 interface ConduitApi {
 
-    @GET("articles")
-    suspend fun getArticles(
-            @Query("tag") tag: String? = null,
-            @Query("favourited") favourited: String? = null,
-            @Query("author") author: String? = null
-    ): Response<ArticlesResponse>
-
-    @GET("articles/{slug}")
-    suspend fun getArticlesBySlug(
-            @Path("slug") slug: String
-    ): Response<ArticleResponse>
-
-    @GET("articles/{slug}/comments")
-    suspend fun getCommentsOnArticle(
-            @Path("slug") slug: String
-    ): Response<CommentsResponse>
-
     @GET("tags")
     suspend fun getTags(): Response<TagsResponse>
 

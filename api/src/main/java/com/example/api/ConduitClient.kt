@@ -29,7 +29,7 @@ object ConduitClient {
     private val okkHttpBuilder = OkHttpClient.Builder()
         .readTimeout(5,TimeUnit.SECONDS)
         .callTimeout(5,TimeUnit.SECONDS)
-        .connectTimeout(5,TimeUnit.SECONDS)
+        .connectTimeout(25,TimeUnit.SECONDS)
 
     private val retrofitBuilder = Retrofit.Builder()
         .baseUrl("https://conduit.productionready.io/api/")

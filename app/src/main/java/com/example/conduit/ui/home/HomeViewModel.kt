@@ -13,17 +13,21 @@ class HomeViewModel : ViewModel() {
     private val basicApi = ConduitClient.basicApi
     private val authApi = ConduitClient.authApi
 
-    var globalFeedList  = MutableLiveData<List<Article>>()
-    var myFeedList  = MutableLiveData<List<Article>>()
+    var globalFeedList  = MutableLiveData(emptyList<Article>())
+    var myFeedList  = MutableLiveData(emptyList<Article>())
 
     fun fetchGlobalFeed() = viewModelScope.launch {
-        val articlesResponse = basicApi.getArticles()
-        globalFeedList.postValue(articlesResponse.body()?.articles)
+        val articlesResponse = authApi.getArticles()
+        articlesResponse.body()?.articles?.let {
+            globalFeedList.postValue(it)
+        }
     }
 
     fun fetchMyFeed() = viewModelScope.launch {
         val articlesResponse = authApi.getFeedArticles()
-        myFeedList.postValue(articlesResponse.body()?.articles)
+        articlesResponse.body()?.articles?.let {
+            myFeedList.postValue(it)
+        }
     }
 
 

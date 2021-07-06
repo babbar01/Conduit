@@ -9,4 +9,6 @@
     <string name="member_already_login">Click here to Login</string>
     <string name="tab_global_feed">Global Feed</string>
     <string name="tab_my_feed">My Feed</string>
+    <string name="string_profile_name">profile name</string>
+    <string name="string_edit_profile_settings">Edit Profile Settings</string>
 </resources>

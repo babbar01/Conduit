@@ -2,8 +2,11 @@
 <resources>
     <color name="conduit_green">#5CB85C</color>
     <color name="conduit_green_dark">#426C42</color>
+    <color name="conduit_blue">#1565c0</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="conduit_grey">#BAA9A9</color>
     <color name="grey">#B3ADAD</color>
+    <color name="red">#b71c1c</color>
+    <color name="conduit_dark_grey">#333</color>
 </resources>

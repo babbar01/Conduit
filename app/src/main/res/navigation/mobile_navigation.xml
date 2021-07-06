@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.conduit.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_create_article"
@@ -21,13 +25,23 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.conduit.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_login"
         android:name="com.example.conduit.ui.auth.AuthFragment"
         android:label="@string/title_login"
         tools:layout="@layout/fragment_auth" />
+
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.example.conduit.ui.article.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" />
 
 
 </navigation>
