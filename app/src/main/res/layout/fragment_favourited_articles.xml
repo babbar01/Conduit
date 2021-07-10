@@ -6,6 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.FragmentFavouritedArticles">
 
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:id="@+id/emptyLayout"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vector_favourited" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="You can see your favourited articles here"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerViewFavouritedArticles"
         android:layout_width="match_parent"

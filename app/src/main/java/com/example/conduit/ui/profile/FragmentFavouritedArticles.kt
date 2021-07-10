@@ -46,6 +46,14 @@ class FragmentFavouritedArticles : Fragment() {
         }
 
         favouritedArticlesViewModel.favouritedArticlesList.observe(viewLifecycleOwner){
+            if(it.isEmpty()){
+                binding.emptyLayout.visibility = View.VISIBLE
+                binding.recylerViewFavouritedArticles.visibility = View.GONE
+            }
+            else {
+                binding.emptyLayout.visibility = View.GONE
+                binding.recylerViewFavouritedArticles.visibility = View.VISIBLE
+            }
             mAdapter.submitList(it)
         }
 

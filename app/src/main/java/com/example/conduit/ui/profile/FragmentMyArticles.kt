@@ -45,6 +45,14 @@ class FragmentMyArticles : Fragment() {
         }
 
         myArticleViewModel.myArticlesList.observe(viewLifecycleOwner){
+            if(it.isEmpty()){
+                binding.emptyLayout.visibility = View.VISIBLE
+                binding.recyclerViewMyArticles.visibility = View.GONE
+            }
+            else {
+                binding.emptyLayout.visibility = View.GONE
+                binding.recyclerViewMyArticles.visibility = View.VISIBLE
+            }
             mAdapter.submitList(it)
         }
 
