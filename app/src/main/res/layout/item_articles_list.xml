@@ -3,8 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/profileImageView"
+        android:src="@color/conduit_green"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/titleTextView"
@@ -14,6 +34,15 @@
         android:padding="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         tools:text="Title of the Article" />
+
+    <TextView
+        android:id="@+id/bodyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:padding="4dp"
+
+        tools:text="ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,14 +78,9 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/bodyTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:padding="4dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:text="ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error" />
+    </LinearLayout>
+
+    </LinearLayout>
 
     <View
         android:layout_marginTop="5dp"
