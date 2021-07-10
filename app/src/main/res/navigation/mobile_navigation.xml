@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_articleFragment"
             app:destination="@id/articleFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_profileSettings"
+            app:destination="@id/profileSettings" />
     </fragment>
 
     <fragment
@@ -42,6 +45,11 @@
         android:name="com.example.conduit.ui.article.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article" />
+    <fragment
+        android:id="@+id/profileSettings"
+        android:name="com.example.conduit.ui.profileSettings.ProfileSettings"
+        android:label="fragment_profile_settings"
+        tools:layout="@layout/fragment_profile_settings" />
 
 
 </navigation>

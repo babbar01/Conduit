@@ -18,10 +18,10 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel() {
 
-    val TAG = "AuthViewModelTag"
+    private val TAG = "AuthViewModelTag"
 
-    val basicApi = ConduitClient.basicApi
-    val authApi = ConduitClient.authApi
+    private val basicApi = ConduitClient.basicApi
+    private val authApi = ConduitClient.authApi
 
     val user = MutableLiveData<User?>(null)
 

@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.api.ConduitClient
 import com.example.conduit.R
@@ -39,13 +40,15 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-
-
-
         authViewModel.user.observe(viewLifecycleOwner) {
             Log.d(TAG, "onCreateView: ${it?.image}")
             binding.profileNameTextView.text = it?.username
             it?.image?.let { url -> Glide.with(this).load(url).into(binding.profileImageView) }
+        }
+
+        binding.chipEditSettings.setOnClickListener{
+            activity?.findNavController(R.id.nav_host_fragment)
+                ?.navigate(R.id.action_navigation_profile_to_profileSettings)
         }
 
         settingTabLayoutListener()

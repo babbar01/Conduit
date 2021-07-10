@@ -22,7 +22,7 @@
            <com.google.android.material.imageview.ShapeableImageView
                android:id="@+id/profileImageView"
                app:shapeAppearanceOverlay="@style/circleImageView"
-               android:src="@color/conduit_green"
+               android:src="@drawable/profile_pic_vector"
                android:layout_width="150dp"
                android:layout_height="150dp"
                app:layout_constraintTop_toTopOf="parent"
