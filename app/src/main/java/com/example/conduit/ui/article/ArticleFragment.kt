@@ -25,6 +25,8 @@ class ArticleFragment : Fragment() {
     companion object{
         const val CHIP_FAVOURITE_STRING = "favourite"
         const val CHIP_UNFAVOURITE_STRING = "unfavourite"
+        const val CHIP_FOLLOW_STRING = "follow user"
+        const val CHIP_FOLLOWING_STRING = "following user"
     }
 
     private var _binding: FragmentArticleBinding? = null
@@ -98,6 +100,34 @@ class ArticleFragment : Fragment() {
         }
     }
 
+    private fun setFollowBtnOnClick(article : Article) {
+        binding.chipFollowUser.setOnClickListener {
+            if(binding.chipFollowUser.text == CHIP_FOLLOW_STRING){
+                binding.chipFollowUser.text = CHIP_FOLLOWING_STRING
+                val deferredResult = articleViewModel.followUser(article.author.username)
+                lifecycleScope.launch {
+                    val response = deferredResult.await()
+                    if(!response.isSuccessful){
+                        binding.chipFollowUser.text = CHIP_FOLLOW_STRING
+                        Toast.makeText(context,"${response.errorBody()}",Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+            else {
+                binding.chipFollowUser.text = CHIP_FOLLOW_STRING
+                val deferredResult = articleViewModel.unfollowUser(article.author.username)
+                lifecycleScope.launch {
+                    val response = deferredResult.await()
+                    if(!response.isSuccessful){
+                        binding.chipFollowUser.text = CHIP_FOLLOWING_STRING
+                        Toast.makeText(context,"${response.errorBody()}",Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            }
+        }
+    }
+
     private fun setArticleInLayout() {
         authViewModel.currentArticle.observe(viewLifecycleOwner) { article ->
             this.article = article
@@ -107,10 +137,14 @@ class ArticleFragment : Fragment() {
 
 
                 setFavouriteBtnOnClick(it)
+                setFollowBtnOnClick(it)
 
                 binding.apply {
                     chipFavouriteArticle.text = if(it.favorited) CHIP_UNFAVOURITE_STRING
                         else CHIP_FAVOURITE_STRING
+
+                    chipFollowUser.text = if(it.author.following) CHIP_FOLLOWING_STRING
+                        else CHIP_FOLLOW_STRING
 
                     articleTitle.text = it.title
                     authorTextViewArticleFragment.text = it.author.username

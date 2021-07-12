@@ -9,6 +9,7 @@ import com.example.api.models.entity.AddCommentCreds
 import com.example.api.models.entity.Comment
 import com.example.api.models.request.AddCommentRequest
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -37,6 +38,14 @@ class ArticleViewModel : ViewModel() {
 
     fun favouriteArticle(slug : String) = viewModelScope.async(Dispatchers.IO) {
         return@async authApi.favouriteArticle(slug)
+    }
+
+    fun followUser(username : String) = viewModelScope.async(Dispatchers.IO){
+        return@async authApi.followUser(username)
+    }
+
+    fun unfollowUser(username : String) = viewModelScope.async(Dispatchers.IO){
+        return@async authApi.unfollowUser(username)
     }
 
     fun unfavouriteArticle(slug : String) = viewModelScope.async(Dispatchers.IO) {

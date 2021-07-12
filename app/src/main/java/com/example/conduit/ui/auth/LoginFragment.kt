@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.conduit.R
 import com.example.conduit.databinding.FragmentLoginSignupBinding
 import com.example.conduit.ui.AuthViewModel
@@ -50,18 +48,18 @@ class LoginFragment : Fragment() {
             } else {
 
                 binding.loadingCircular.visibility = View.VISIBLE
-                val loginDeffered = authViewModel.login(email, password)
+                val loginDeferred = authViewModel.login(email, password)
 
                 lifecycleScope.launch {
 
-                    val userResponse = loginDeffered.await()
+                    val userResponse = loginDeferred.await()
                     binding.loadingCircular.visibility = View.GONE
 
-                    if (userResponse?.user != null) {
+                    if (userResponse.isSuccessful) {
                         Toast.makeText(context, "User Logged In", Toast.LENGTH_SHORT).show()
                         activity?.findNavController(R.id.nav_host_fragment)?.navigateUp()
                     }
-                    // TODO: 21-04-2021 handle error case
+                    else Toast.makeText(context, "${userResponse.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -33,7 +33,7 @@ class AuthViewModel : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             val userResponse = authApi.getCurrentUser()
-            user.postValue(userResponse.body()?.user)
+            if(userResponse.isSuccessful) user.postValue(userResponse.body()?.user)
         }
     }
 
@@ -44,7 +44,7 @@ class AuthViewModel : ViewModel() {
             ConduitClient.authToken = it.user.token
         }
 
-        return@async userResponse.body()
+        return@async userResponse
     }
 
     fun signup(username: String, email: String, password: String) =
