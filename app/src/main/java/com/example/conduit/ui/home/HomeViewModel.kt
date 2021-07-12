@@ -17,7 +17,7 @@ class HomeViewModel : ViewModel() {
     var myFeedList  = MutableLiveData(emptyList<Article>())
 
     fun fetchGlobalFeed() = viewModelScope.launch {
-        val articlesResponse = authApi.getArticles()
+        val articlesResponse = basicApi.getArticles()
         articlesResponse.body()?.articles?.let {
             globalFeedList.postValue(it)
         }
