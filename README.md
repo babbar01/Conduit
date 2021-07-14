@@ -1,6 +1,8 @@
 # Conduit
+<img src="https://user-images.githubusercontent.com/53184162/125574859-9cc65e4e-a1d6-459a-a784-65da66f76f89.png">
 
 ## About
+
 Android/Kotlin codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the RealWorld spec and API.
 - Article/Story/Blog writing application like medium:page_with_curl:.
 - Users can follow other users to see their articles in their feed:boy:.
